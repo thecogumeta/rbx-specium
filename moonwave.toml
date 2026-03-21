@@ -1,0 +1,23 @@
+title = "Specium"
+gitRepoUrl = "https://github.com/thecogumeta/specium"
+gitSourceBranch = "main"
+
+[docusaurus]
+onBrokenLinks = "throw"
+onBrokenMarkdownLinks = "warn"
+
+[home]
+enabled = true
+includeReadme = true
+
+[[home.features]]
+title = "Suites & Sub-suites"
+description = "Organize your tests into structured suites and nested sub-suites with a simple and readable API."
+
+[[home.features]]
+title = "Expressive Assertions"
+description = "Write clear assertions with expect and a rich set of matchers. Invert any matcher with .never and add context with .withMessage."
+
+[[home.features]]
+title = "Auto-discovery"
+description = "Use runTests to automatically scan folders for .spec modules and run them all at once, no manual wiring needed."

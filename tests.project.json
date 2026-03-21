@@ -1,0 +1,16 @@
+{
+  "name": "Specium Test-Runner",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "Specium": {
+        "$path": "lib"
+      }
+    },
+    "ServerScriptService": {
+      "Tests": {
+        "$path": "tests"
+      }
+    }
+  }
+}

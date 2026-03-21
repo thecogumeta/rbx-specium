@@ -1,0 +1,12 @@
+[package]
+name = "thecogumeta/specium"
+description = "A simple, flexible, and lightweight object pooling module for Roblox that works with any type of object, not just Instances."
+version = "1.0.0"
+license = "MIT"
+authors = ["Cogu (@thecogumeta)"]
+realm = "shared"
+registry = "https://github.com/UpliftGames/wally-index"
+exclude = ["**"]
+include = ["lib", "default.project.json"]
+
+[dependencies]
