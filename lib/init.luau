@@ -15,6 +15,10 @@ type SpeciumSuite = {
 	name: string,
 	tests: { SpeciumTest },
 	subSuites: { SpeciumSuite },
+	beforeAll: (() -> ())?,
+	afterAll: (() -> ())?,
+	beforeEach: (() -> ())?,
+	afterEach: (() -> ())?,
 }
 type SpeciumTestResult = {
 	name: string,
@@ -55,10 +59,18 @@ export type SpeciumRunResult = {
 	@within Specium
 	.it (name: string, fn: () -> SpeciumResult) -> () -- Registers a test case inside the current suite
 	.describe (name: string, fn: (SpeciumSuiteContext) -> ()) -> () -- Creates a nested sub-suite
+	.beforeAll (() -> ())? -- Runs once before all tests in the suite
+	.afterAll (() -> ())? -- Runs once after all tests in the suite
+	.beforeEach (() -> ())? -- Runs before each test in the suite
+	.afterEach (() -> ())? -- Runs after each test in the suite
 ]=]
 export type SpeciumSuiteContext = {
 	it: (name: string, fn: () -> SpeciumResult) -> (),
 	describe: (name: string, fn: (SpeciumSuiteContext) -> ()) -> (),
+	beforeAll: (() -> ()) -> (),
+	afterAll: (() -> ()) -> (),
+	beforeEach: (() -> ()) -> (),
+	afterEach: (() -> ()) -> (),
 }
 
 --[=[
@@ -115,6 +127,17 @@ function Specium.suite(name: string, fn: (SpeciumSuiteContext) -> ()): SpeciumSu
 			fn(createContext(newSuite))
 		end
 
+		local function createSuiteSetter(key: string)
+			ctx[key] = function(value: any)
+				currentSuite[key] = value
+			end
+		end
+
+		createSuiteSetter("beforeAll")
+		createSuiteSetter("afterAll")
+		createSuiteSetter("beforeEach")
+		createSuiteSetter("afterEach")
+
 		return ctx
 	end
 
@@ -169,10 +192,28 @@ function Specium.run(suite: SpeciumSuite): (string, SpeciumRunResult)
 
 		output ..= `{string.rep(" ", depth - 1)}> {currentSuite.name}\n`
 
+		local function opcall(fn: (() -> ())?, hookName: string)
+			if not fn then
+				return
+			end
+
+			local ok, err = xpcall(fn, function(e)
+				return `{e}\n{debug.traceback()}`
+			end)
+
+			if not ok then
+				warn(`[Specium] {hookName} failed in "{currentSuite.name}": {err}`)
+			end
+		end
+
+		opcall(currentSuite.beforeAll, "beforeAll")
+
 		for _, test in currentSuite.tests do
 			total += 1
 
+			opcall(currentSuite.beforeEach, "beforeEach")
 			local ok, result = pcall(test.fn)
+			opcall(currentSuite.afterEach, "afterEach")
 
 			if not ok then
 				result = Specium.error(tostring(result))
@@ -198,6 +239,8 @@ function Specium.run(suite: SpeciumSuite): (string, SpeciumRunResult)
 			local subResult = runSuite(sub, depth + 1)
 			table.insert(suiteResult.subSuites, subResult)
 		end
+
+		opcall(currentSuite.afterAll, "afterAll")
 
 		return suiteResult
 	end

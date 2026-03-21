@@ -25,6 +25,10 @@ interface SpeciumTestResult {
 interface SpeciumSuiteContext {
   it(name: string, fn: () => SpeciumResult | void): void;
   describe(name: string, fn: (ctx: SpeciumSuiteContext) => void): void;
+  beforeAll(fn: () => void): void;
+  afterAll(fn: () => void): void;
+  beforeEach(fn: () => void): void;
+  afterEach(fn: () => void): void;
 }
 
 interface SpeciumSuite {
@@ -54,9 +58,7 @@ interface SpeciumMatchers extends SpeciumMatchersRaw {
 interface Specium {
   suite(name: string, fn: (ctx: SpeciumSuiteContext) => void): SpeciumSuite;
   run(suite: SpeciumSuite): [string, SpeciumRunResult];
-  runTests(
-    testsFolder: Instance | Instance[],
-  ): [string, Array<SpeciumRunResult>];
+  runTests(testsFolder: Instance | Instance[]): [string, SpeciumRunResult[]];
   expect(received: unknown): SpeciumMatchers;
   success(message: string): SpeciumResult;
   error(message: string): SpeciumResult;
