@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Specium | Specium</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://thecogumeta.github.io/specium/api/Specium"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Specium | Specium"><meta data-rh="true" name="description" content="A lightweight and flexible testing framework for Roblox.
+
+Specium allows you to organize tests into suites and sub-suites,
+run them and get a detailed report of the results."><meta data-rh="true" property="og:description" content="A lightweight and flexible testing framework for Roblox.
+
+Specium allows you to organize tests into suites and sub-suites,
+run them and get a detailed report of the results."><link data-rh="true" rel="canonical" href="https://thecogumeta.github.io/specium/api/Specium"><link data-rh="true" rel="alternate" href="https://thecogumeta.github.io/specium/api/Specium" hreflang="en"><link data-rh="true" rel="alternate" href="https://thecogumeta.github.io/specium/api/Specium" hreflang="x-default"><link rel="stylesheet" href="/specium/assets/css/styles.5cbed574.css">
+<script src="/specium/assets/js/runtime~main.e7b80bc5.js" defer="defer"></script>
+<script src="/specium/assets/js/main.6099399e.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/specium/"><b class="navbar__title text--truncate">Specium</b></a><a class="navbar__item navbar__link" href="/specium/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/specium/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/thecogumeta/specium" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/specium/api/Specium">​Specium</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">Specium</span></h1><div class="luaClassTags_EipM"></div><div>
+<p>A lightweight and flexible testing framework for Roblox.</p>
+<p>
+  Specium allows you to organize tests into suites and sub-suites,
+  run them and get a detailed report of the results.
+</p>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="types">Types<a href="#types" class="hash-link" aria-label="Direct link to Types" title="Direct link to Types">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SpeciumResult"><code style="text-decoration:none">SpeciumResult</code><a href="#SpeciumResult" class="hash-link" aria-label="Direct link to SpeciumResult" title="Direct link to SpeciumResult">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/specium/blob/main/lib/init.luau#L35"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>SpeciumResult<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>success<!-- -->: </code><code class="blue_P4bS">boolean</code><span class="inlineDescription_G7Er">-- <span>
+<p>Whether the test passed or failed</p>
+</span></span></div><div><code>message<!-- -->: </code><code class="blue_P4bS">string</code><span class="inlineDescription_G7Er">-- <span>
+<p>A message describing the result</p>
+</span></span></div></div><code>}</code></div><div></div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SpeciumRunResult"><code style="text-decoration:none">SpeciumRunResult</code><a href="#SpeciumRunResult" class="hash-link" aria-label="Direct link to SpeciumRunResult" title="Direct link to SpeciumRunResult">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/specium/blob/main/lib/init.luau#L47"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>SpeciumRunResult<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>total<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>Total number of tests run</p>
+</span></span></div><div><code>passed<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>Number of tests that passed</p>
+</span></span></div><div><code>failed<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>Number of tests that failed</p>
+</span></span></div><div><code>suites<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">SpeciumSuiteResult</code><code class="purple_ieR2">}</code><span class="inlineDescription_G7Er">-- <span>
+<p>Results for each root suite</p>
+</span></span></div></div><code>}</code></div><div></div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="suite"><code style="text-decoration:none">suite</code><a href="#suite" class="hash-link" aria-label="Direct link to suite" title="Direct link to suite">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/specium/blob/main/lib/init.luau#L89"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Specium<!-- -->.</code><code class="green_DgR4">suite</code><code>(</code><div class="inset_uKQm"><div><code>name<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The name of the suite</p>
+</span></span></div><div><code>fn<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/specium/api/Specium#SpeciumSuiteContext">SpeciumSuiteContext</a></code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>A function that registers tests and sub-suites</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">SpeciumSuite</code><span class="inlineDescription_G7Er">-- <span>
+<p>The constructed suite, ready to be passed to <code>Specium.run</code></p>
+</span></span></div><h3>Types</h3><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SpeciumSuiteContext"><a href="#SpeciumSuiteContext" class="hash-link" aria-label="Direct link to SpeciumSuiteContext" title="Direct link to SpeciumSuiteContext">​</a></h3><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>SpeciumSuiteContext<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>it<!-- -->: </code><code class="purple_ieR2">(</code><div class="inset_uKQm"><code>name<!-- -->: </code><code class="blue_P4bS">string</code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code>fn<!-- -->: </code><code class="green_DgR4">(</code><code class="green_DgR4">)</code><code class="green_DgR4"> → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/specium/api/Specium#SpeciumResult">SpeciumResult</a></code></div><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>Registers a test case inside the current suite</p>
+</span></span></div><div><code>describe<!-- -->: </code><code class="purple_ieR2">(</code><div class="inset_uKQm"><code>name<!-- -->: </code><code class="blue_P4bS">string</code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code>fn<!-- -->: </code><code class="green_DgR4">(</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/specium/api/Specium#SpeciumSuiteContext">SpeciumSuiteContext</a></code><code class="green_DgR4">)</code><code class="green_DgR4"> → </code><code class="green_DgR4">(</code><code class="green_DgR4">)</code></div><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>Creates a nested sub-suite</p>
+</span></span></div></div><code>}</code></div><div></div><div>
+<p>Creates a new test suite.</p>
+<p>Example:</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> suite <span class="token operator">=</span> Specium<span class="token punctuation">.</span><span class="token function">suite</span><span class="token punctuation">(</span><span class="token string">"Math"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">it</span><span class="token punctuation">(</span><span class="token string">"adds numbers"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		Specium<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span> Specium<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token string">"ok"</span><span class="token punctuation">)</span>
+	<span class="token keyword">end</span><span class="token punctuation">)</span>
+
+	t<span class="token punctuation">.</span><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">"subtraction"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span>
+		t<span class="token punctuation">.</span><span class="token function">it</span><span class="token punctuation">(</span><span class="token string">"subtracts numbers"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			Specium<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token number">5</span> <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+			<span class="token keyword">return</span> Specium<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token string">"ok"</span><span class="token punctuation">)</span>
+		<span class="token keyword">end</span><span class="token punctuation">)</span>
+	<span class="token keyword">end</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="run"><code style="text-decoration:none">run</code><a href="#run" class="hash-link" aria-label="Direct link to run" title="Direct link to run">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/specium/blob/main/lib/init.luau#L147"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Specium<!-- -->.</code><code class="green_DgR4">run</code><code>(</code><div class="inset_uKQm"><div><code>suite<!-- -->: </code><code class="blue_P4bS">SpeciumSuite</code><span class="inlineDescription_G7Er">-- <span>
+<p>The suite to run</p>
+</span></span></div></div><code>) → </code><code>(</code><div class="inset_uKQm"><div><code class="blue_P4bS">string</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>A formatted output string with a tree-view of results and a summary</p>
+</span></span></div><div><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/specium/api/Specium#SpeciumRunResult">SpeciumRunResult</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>A structured table with the full results</p>
+</span></span></div></div><code>)</code></div><div>
+<p>Runs all tests in a suite (including sub-suites).</p>
+<p>Example:</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> output<span class="token punctuation">,</span> results <span class="token operator">=</span> Specium<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>suite<span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span>
+<span class="token comment">-- > Math</span>
+<span class="token comment">--   [Pass] adds numbers - ok</span>
+<span class="token comment">--   > subtraction</span>
+<span class="token comment">--     [Pass] subtracts numbers - ok</span>
+<span class="token comment">--</span>
+<span class="token comment">-- Result:</span>
+<span class="token comment">-- 2/2 (100%) tests passed</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="runTests"><code style="text-decoration:none">runTests</code><a href="#runTests" class="hash-link" aria-label="Direct link to runTests" title="Direct link to runTests">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/specium/blob/main/lib/init.luau#L243"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Specium<!-- -->.</code><code class="green_DgR4">runTests</code><code>(</code><div class="inset_uKQm"><div><code>testsFolder<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="purple_ieR2">}</code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>A single folder or a list of folders to scan for <code>.spec</code> ModuleScripts.</p>
+</span></span></div></div><code>) → </code><code>(</code><div class="inset_uKQm"><div><code class="blue_P4bS">string</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>A concatenated output string of all suite results</p>
+</span></span></div><div><code class="purple_ieR2">{</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/specium/api/Specium#SpeciumRunResult">SpeciumRunResult</a></code><code class="purple_ieR2">}</code><span class="inlineDescription_G7Er">-- <span>
+<p>A list of results, one per suite found</p>
+</span></span></div></div><code>)</code></div><div>
+<p>Scans one or more folders for <code>.spec</code> ModuleScripts and runs each one as a suite.</p>
+<p>
+  Each <code>.spec</code> module must return a <code>SpeciumSuite</code> created via <code>Specium.suite</code>.
+  If a module fails to load, a warning is emitted and it is skipped.
+</p>
+<p>Example:</p>
+<pre class="language-lua"><code class="language-lua"><span class="token comment">-- Single folder</span>
+<span class="token keyword">local</span> output<span class="token punctuation">,</span> results <span class="token operator">=</span> Specium<span class="token punctuation">.</span><span class="token function">runTests</span><span class="token punctuation">(</span>ServerScriptService<span class="token punctuation">.</span>Tests<span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span>
+
+<span class="token comment">-- Multiple folders</span>
+<span class="token keyword">local</span> output<span class="token punctuation">,</span> results <span class="token operator">=</span> Specium<span class="token punctuation">.</span><span class="token function">runTests</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	ServerScriptService<span class="token punctuation">.</span>Tests<span class="token punctuation">,</span>
+	ReplicatedStorage<span class="token punctuation">.</span>Shared<span class="token punctuation">.</span>Tests<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="error"><code style="text-decoration:none">error</code><a href="#error" class="hash-link" aria-label="Direct link to error" title="Direct link to error">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/specium/blob/main/lib/init.luau#L285"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Specium<!-- -->.</code><code class="green_DgR4">error</code><code>(</code><div class="inset_uKQm"><div><code>message<!-- -->: </code><code class="blue_P4bS">string</code><span class="inlineDescription_G7Er">-- <span>
+<p>The failure message</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/specium/api/Specium#SpeciumResult">SpeciumResult</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>A result with <code>success = false</code></p>
+</span></span></div><div>
+<p>Returns a failed <code>SpeciumResult</code> with the given message.</p>
+<p>Example:</p>
+<pre class="language-lua"><code class="language-lua">t<span class="token punctuation">.</span><span class="token function">it</span><span class="token punctuation">(</span><span class="token string">"always fails"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">return</span> Specium<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"this test is not implemented yet"</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="success"><code style="text-decoration:none">success</code><a href="#success" class="hash-link" aria-label="Direct link to success" title="Direct link to success">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/specium/blob/main/lib/init.luau#L305"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Specium<!-- -->.</code><code class="green_DgR4">success</code><code>(</code><div class="inset_uKQm"><div><code>message<!-- -->: </code><code class="blue_P4bS">string</code><span class="inlineDescription_G7Er">-- <span>
+<p>The success message</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/specium/api/Specium#SpeciumResult">SpeciumResult</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>A result with <code>success = true</code></p>
+</span></span></div><div>
+<p>Returns a successful <code>SpeciumResult</code> with the given message.</p>
+<p>Example:</p>
+<pre class="language-lua"><code class="language-lua"><span class="token comment">-- Returning Specium.success is optional — if omitted, the test is marked as passed automatically.</span>
+t<span class="token punctuation">.</span><span class="token function">it</span><span class="token punctuation">(</span><span class="token string">"works"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	Specium<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+	<span class="token keyword">return</span> Specium<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token string">"all good"</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="expect"><code style="text-decoration:none">expect</code><a href="#expect" class="hash-link" aria-label="Direct link to expect" title="Direct link to expect">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/specium/blob/main/lib/init.luau#L347"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Specium<!-- -->.</code><code class="green_DgR4">expect</code><code>(</code><div class="inset_uKQm"><div><code>received<!-- -->: </code><code class="blue_P4bS">any</code><span class="inlineDescription_G7Er">-- <span>
+<p>The value to assert against</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">SpeciumMatchers</code><span class="inlineDescription_G7Er">-- <span>
+<p>A table of matcher functions</p>
+</span></span></div><div>
+<p>Creates a matcher chain for the given value.</p>
+<p>
+  Use <code>.never</code> to invert any matcher, and <code>.withMessage(msg)</code> to prepend
+  a custom message to any failure.
+</p>
+<p>Available matchers:</p>
+<ul>
+  <li><code>toBe(expected)</code> — strict equality (<code>==</code>)</li>
+  <li><code>toEqual(expected)</code> — deep equality (tables compared recursively)</li>
+  <li><code>toBeA(type, legacy?)</code> — checks <code>typeof</code> (or <code>type</code> if <code>legacy</code> is true)</li>
+  <li><code>toBeTruthy()</code> — value is not <code>nil</code> and not <code>false</code></li>
+  <li><code>toBeNil()</code> — value is <code>nil</code></li>
+  <li><code>toBeNear(expected, epsilon?)</code> — numeric proximity (default epsilon: <code>1e-5</code>)</li>
+  <li><code>toBeGreaterThan(expected)</code> — numeric <code>></code></li>
+  <li><code>toBeLessThan(expected)</code> — numeric <code>&#x3C;</code></li>
+  <li><code>toContain(item)</code> — table contains value (deep) or string contains substring</li>
+  <li><code>toHaveLength(expected)</code> — checks <code>#value</code></li>
+  <li><code>toMatch(pattern)</code> — string matches a Lua pattern</li>
+  <li><code>toThrow(expected?, ...args)</code> — function throws when called with <code>args</code></li>
+  <li><code>withMessage(msg)</code> — prepends a custom message to any failure</li>
+  <li><code>never</code> — inverts the next matcher</li>
+</ul>
+<p>Example:</p>
+<pre class="language-lua"><code class="language-lua"><span class="token comment">-- All examples below pass</span>
+Specium<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+Specium<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toContain</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span>
+Specium<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toHaveLength</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+Specium<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span>math<span class="token punctuation">.</span>huge<span class="token punctuation">)</span><span class="token punctuation">.</span>never<span class="token punctuation">.</span><span class="token function">toBeNil</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+Specium<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"oops"</span><span class="token punctuation">)</span> <span class="token keyword">end</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toThrow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+Specium<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">withMessage</span><span class="token punctuation">(</span><span class="token string">"answer should be 42"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span>
+Specium<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>never<span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+</code></pre>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;suite&quot;,
+            &quot;desc&quot;: &quot;Creates a new test suite.\n\nExample:\n```lua\nlocal suite = Specium.suite(\&quot;Math\&quot;, function(t)\n\tt.it(\&quot;adds numbers\&quot;, function()\n\t\tSpecium.expect(1 + 1).toBe(2)\n\t\treturn Specium.success(\&quot;ok\&quot;)\n\tend)\n\n\tt.describe(\&quot;subtraction\&quot;, function(t)\n\t\tt.it(\&quot;subtracts numbers\&quot;, function()\n\t\t\tSpecium.expect(5 - 3).toBe(2)\n\t\t\treturn Specium.success(\&quot;ok\&quot;)\n\t\tend)\n\tend)\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;name&quot;,
+                    &quot;desc&quot;: &quot;The name of the suite&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;fn&quot;,
+                    &quot;desc&quot;: &quot;A function that registers tests and sub-suites&quot;,
+                    &quot;lua_type&quot;: &quot;(SpeciumSuiteContext) -&gt; ()&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;The constructed suite, ready to be passed to `Specium.run`&quot;,
+                    &quot;lua_type&quot;: &quot;SpeciumSuite&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 89,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;run&quot;,
+            &quot;desc&quot;: &quot;Runs all tests in a suite (including sub-suites).\n\nExample:\n```lua\nlocal output, results = Specium.run(suite)\nprint(output)\n-- &gt; Math\n--   [Pass] adds numbers - ok\n--   &gt; subtraction\n--     [Pass] subtracts numbers - ok\n--\n-- Result:\n-- 2/2 (100%) tests passed\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;suite&quot;,
+                    &quot;desc&quot;: &quot;The suite to run&quot;,
+                    &quot;lua_type&quot;: &quot;SpeciumSuite&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;A formatted output string with a tree-view of results and a summary&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;desc&quot;: &quot;A structured table with the full results&quot;,
+                    &quot;lua_type&quot;: &quot;SpeciumRunResult&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 147,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;runTests&quot;,
+            &quot;desc&quot;: &quot;Scans one or more folders for `.spec` ModuleScripts and runs each one as a suite.\n\nEach `.spec` module must return a `SpeciumSuite` created via `Specium.suite`.\nIf a module fails to load, a warning is emitted and it is skipped.\n\nExample:\n```lua\n-- Single folder\nlocal output, results = Specium.runTests(ServerScriptService.Tests)\nprint(output)\n\n-- Multiple folders\nlocal output, results = Specium.runTests({\n\tServerScriptService.Tests,\n\tReplicatedStorage.Shared.Tests,\n})\nprint(output)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;testsFolder&quot;,
+                    &quot;desc&quot;: &quot;A single folder or a list of folders to scan for `.spec` ModuleScripts.&quot;,
+                    &quot;lua_type&quot;: &quot;{Instance} | Instance&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;A concatenated output string of all suite results&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;desc&quot;: &quot;A list of results, one per suite found&quot;,
+                    &quot;lua_type&quot;: &quot;{SpeciumRunResult}&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 243,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;error&quot;,
+            &quot;desc&quot;: &quot;Returns a failed `SpeciumResult` with the given message.\n\nExample:\n```lua\nt.it(\&quot;always fails\&quot;, function()\n\treturn Specium.error(\&quot;this test is not implemented yet\&quot;)\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;message&quot;,
+                    &quot;desc&quot;: &quot;The failure message&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;A result with `success = false`&quot;,
+                    &quot;lua_type&quot;: &quot;SpeciumResult&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 285,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;success&quot;,
+            &quot;desc&quot;: &quot;Returns a successful `SpeciumResult` with the given message.\n\nExample:\n```lua\n-- Returning Specium.success is optional — if omitted, the test is marked as passed automatically.\nt.it(\&quot;works\&quot;, function()\n\tSpecium.expect(1 + 1).toBe(2)\n\treturn Specium.success(\&quot;all good\&quot;)\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;message&quot;,
+                    &quot;desc&quot;: &quot;The success message&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;A result with `success = true`&quot;,
+                    &quot;lua_type&quot;: &quot;SpeciumResult&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 305,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;expect&quot;,
+            &quot;desc&quot;: &quot;Creates a matcher chain for the given value.\n\nUse `.never` to invert any matcher, and `.withMessage(msg)` to prepend\na custom message to any failure.\n\nAvailable matchers:\n- `toBe(expected)` — strict equality (`==`)\n- `toEqual(expected)` — deep equality (tables compared recursively)\n- `toBeA(type, legacy?)` — checks `typeof` (or `type` if `legacy` is true)\n- `toBeTruthy()` — value is not `nil` and not `false`\n- `toBeNil()` — value is `nil`\n- `toBeNear(expected, epsilon?)` — numeric proximity (default epsilon: `1e-5`)\n- `toBeGreaterThan(expected)` — numeric `&gt;`\n- `toBeLessThan(expected)` — numeric `&lt;`\n- `toContain(item)` — table contains value (deep) or string contains substring\n- `toHaveLength(expected)` — checks `#value`\n- `toMatch(pattern)` — string matches a Lua pattern\n- `toThrow(expected?, ...args)` — function throws when called with `args`\n- `withMessage(msg)` — prepends a custom message to any failure\n- `never` — inverts the next matcher\n\nExample:\n```lua\n-- All examples below pass\nSpecium.expect(2 + 2).toBe(4)\nSpecium.expect(\&quot;hello world\&quot;).toContain(\&quot;world\&quot;)\nSpecium.expect({1, 2, 3}).toHaveLength(3)\nSpecium.expect(math.huge).never.toBeNil()\nSpecium.expect(function() error(\&quot;oops\&quot;) end).toThrow()\nSpecium.expect(42).withMessage(\&quot;answer should be 42\&quot;).toBe(42)\nSpecium.expect(1 + 1).never.toBe(3)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;received&quot;,
+                    &quot;desc&quot;: &quot;The value to assert against&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;A table of matcher functions&quot;,
+                    &quot;lua_type&quot;: &quot;SpeciumMatchers&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 347,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [],
+    &quot;types&quot;: [
+        {
+            &quot;name&quot;: &quot;SpeciumResult&quot;,
+            &quot;desc&quot;: &quot;&quot;,
+            &quot;fields&quot;: [
+                {
+                    &quot;name&quot;: &quot;success&quot;,
+                    &quot;lua_type&quot;: &quot;boolean&quot;,
+                    &quot;desc&quot;: &quot;Whether the test passed or failed&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;message&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;,
+                    &quot;desc&quot;: &quot;A message describing the result&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 35,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SpeciumRunResult&quot;,
+            &quot;desc&quot;: &quot;&quot;,
+            &quot;fields&quot;: [
+                {
+                    &quot;name&quot;: &quot;total&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;Total number of tests run&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;passed&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;Number of tests that passed&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;failed&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;Number of tests that failed&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;suites&quot;,
+                    &quot;lua_type&quot;: &quot;{SpeciumSuiteResult}&quot;,
+                    &quot;desc&quot;: &quot;Results for each root suite&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 47,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SpeciumSuiteContext&quot;,
+            &quot;desc&quot;: &quot;&quot;,
+            &quot;fields&quot;: [
+                {
+                    &quot;name&quot;: &quot;it&quot;,
+                    &quot;lua_type&quot;: &quot;(name: string, fn: () -&gt; SpeciumResult) -&gt; ()&quot;,
+                    &quot;desc&quot;: &quot;Registers a test case inside the current suite&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;describe&quot;,
+                    &quot;lua_type&quot;: &quot;(name: string, fn: (SpeciumSuiteContext) -&gt; ()) -&gt; ()&quot;,
+                    &quot;desc&quot;: &quot;Creates a nested sub-suite&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 59,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        }
+    ],
+    &quot;name&quot;: &quot;Specium&quot;,
+    &quot;desc&quot;: &quot;A lightweight and flexible testing framework for Roblox.\n\nSpecium allows you to organize tests into suites and sub-suites,\nrun them and get a detailed report of the results.&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 8,
+        &quot;path&quot;: &quot;lib/init.luau&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a><ul><li><a href="#SpeciumResult" class="table-of-contents__link toc-highlight">SpeciumResult</a></li><li><a href="#SpeciumRunResult" class="table-of-contents__link toc-highlight">SpeciumRunResult</a></li><li><a href="#SpeciumSuiteContext" class="table-of-contents__link toc-highlight">SpeciumSuiteContext</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#error" class="table-of-contents__link toc-highlight">.error</a></li><li><a href="#expect" class="table-of-contents__link toc-highlight">.expect</a></li><li><a href="#run" class="table-of-contents__link toc-highlight">.run</a></li><li><a href="#runTests" class="table-of-contents__link toc-highlight">.runTests</a></li><li><a href="#success" class="table-of-contents__link toc-highlight">.success</a></li><li><a href="#suite" class="table-of-contents__link toc-highlight">.suite</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 thecogumeta. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

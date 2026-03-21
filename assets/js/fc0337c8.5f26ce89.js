@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[786],{4410:s=>{s.exports=JSON.parse('{"sourceUrl":"https://github.com/thecogumeta/specium/blob/main","baseUrl":"/specium/","classOrder":[],"apiCategories":[]}')}}]);
