@@ -83,3 +83,68 @@ Then run them all at once:
 local output, results = Specium.runTests(ServerScriptService.Tests)
 print(output)
 ```
+
+## Skipping Tests
+
+Use `t.skip` to mark a test as skipped. The test will appear in the output but its function will never run.
+
+```lua
+local suite = Specium.suite("Math", function(t)
+    t.it("adds numbers", function()
+        Specium.expect(1 + 1).toBe(2)
+    end)
+
+    t.skip("not implemented yet", function()
+        Specium.expect(1 + 1).toBe(3)
+    end)
+end)
+```
+
+```
+-- > Math
+--   [Pass] adds numbers
+--   [Skip] not implemented yet
+--
+-- Result:
+-- 1/1 (100%) tests passed, 1 skipped
+```
+
+## Lifecycle Hooks
+
+Use hooks to run setup and cleanup logic around your tests.
+
+```lua
+local suite = Specium.suite("Database", function(t)
+    local db
+
+    t.beforeAll(function()
+        db = Database.connect()
+    end)
+
+    t.afterAll(function()
+        db:disconnect()
+    end)
+
+    t.beforeEach(function()
+        db:reset()
+    end)
+
+    t.it("inserts a record", function()
+        db:insert({ id = 1 })
+        Specium.expect(db:count()).toBe(1)
+    end)
+
+    t.it("deletes a record", function()
+        db:insert({ id = 1 })
+        db:delete(1)
+        Specium.expect(db:count()).toBe(0)
+    end)
+end)
+```
+
+- `beforeAll` — runs once before all tests in the suite
+- `afterAll` — runs once after all tests in the suite
+- `beforeEach` — runs before each test
+- `afterEach` — runs after each test
+
+Hooks are scoped to their suite and do not affect parent or sibling suites.
