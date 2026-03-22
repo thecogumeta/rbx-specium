@@ -10,6 +10,7 @@ local Specium = {}
 type SpeciumTest = {
 	name: string,
 	fn: () -> SpeciumResult,
+	skipped: boolean,
 }
 type SpeciumSuite = {
 	name: string,
@@ -23,6 +24,7 @@ type SpeciumSuite = {
 type SpeciumTestResult = {
 	name: string,
 	success: boolean,
+	skipped: boolean,
 	message: string,
 }
 type SpeciumSuiteResult = {
@@ -52,12 +54,14 @@ export type SpeciumRunResult = {
 	total: number,
 	passed: number,
 	failed: number,
+	skipped: number,
 	suites: { SpeciumSuiteResult },
 }
 --[=[
 	@interface SpeciumSuiteContext
 	@within Specium
 	.it (name: string, fn: () -> SpeciumResult) -> () -- Registers a test case inside the current suite
+	.skip (name: string, fn () -> SpeciumResult) -> () -- Registers a test case that will be skipped when the suite runs
 	.describe (name: string, fn: (SpeciumSuiteContext) -> ()) -> () -- Creates a nested sub-suite
 	.beforeAll (() -> ())? -- Runs once before all tests in the suite
 	.afterAll (() -> ())? -- Runs once after all tests in the suite
@@ -66,6 +70,7 @@ export type SpeciumRunResult = {
 ]=]
 export type SpeciumSuiteContext = {
 	it: (name: string, fn: () -> SpeciumResult) -> (),
+	skip: (name: string, fn: () -> SpeciumResult) -> (),
 	describe: (name: string, fn: (SpeciumSuiteContext) -> ()) -> (),
 	beforeAll: (() -> ()) -> (),
 	afterAll: (() -> ()) -> (),
@@ -112,6 +117,15 @@ function Specium.suite(name: string, fn: (SpeciumSuiteContext) -> ()): SpeciumSu
 			table.insert(currentSuite.tests, {
 				name = name,
 				fn = fn,
+				skipped = false,
+			})
+		end
+
+		function ctx.skip(name: string, fn: () -> SpeciumResult)
+			table.insert(currentSuite.tests, {
+				name = name,
+				fn = fn,
+				skipped = true,
 			})
 		end
 
@@ -170,6 +184,7 @@ end
 function Specium.run(suite: SpeciumSuite): (string, SpeciumRunResult)
 	local total = 0
 	local passed = 0
+	local skipped = 0
 
 	local output = "\n"
 
@@ -177,6 +192,7 @@ function Specium.run(suite: SpeciumSuite): (string, SpeciumRunResult)
 		total = 0,
 		passed = 0,
 		failed = 0,
+		skipped = 0,
 		suites = {},
 	}
 
@@ -211,6 +227,18 @@ function Specium.run(suite: SpeciumSuite): (string, SpeciumRunResult)
 		for _, test in currentSuite.tests do
 			total += 1
 
+			if test.skipped then
+				skipped += 1
+				output ..= `{indent}[Skip] {test.name}\n`
+				table.insert(suiteResult.tests, {
+					name = test.name,
+					success = false,
+					message = "skipped",
+					skipped = true,
+				})
+				continue
+			end
+
 			opcall(currentSuite.beforeEach, "beforeEach")
 			local ok, result = pcall(test.fn)
 			opcall(currentSuite.afterEach, "afterEach")
@@ -232,6 +260,7 @@ function Specium.run(suite: SpeciumSuite): (string, SpeciumRunResult)
 				name = test.name,
 				success = result.success,
 				message = result.message,
+				skipped = false,
 			})
 		end
 
@@ -249,11 +278,26 @@ function Specium.run(suite: SpeciumSuite): (string, SpeciumRunResult)
 
 	results.total = total
 	results.passed = passed
-	results.failed = total - passed
+	results.failed = total - passed - skipped
+	results.skipped = skipped
 	results.suites = { rootResult }
 
 	output ..= "\n\nResult:\n"
-	output ..= total > 0 and `{passed}/{total} ({math.round(passed / total * 1000) / 10}%) tests passed` or "no tests found"
+	if total > 0 then
+		local ran = total - skipped
+		local summary
+		if ran > 0 then
+			summary = `{passed}/{ran} ({math.round(passed / ran * 1000) / 10}%) tests passed`
+		else
+			summary = "all tests skipped"
+		end
+		if skipped > 0 then
+			summary ..= `, {skipped} skipped`
+		end
+		output ..= summary
+	else
+		output ..= "no tests found"
+	end
 
 	return output, results
 end

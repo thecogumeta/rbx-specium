@@ -7,6 +7,7 @@ interface SpeciumRunResult {
   total: number;
   passed: number;
   failed: number;
+  skipped: number;
   suites: SpeciumSuiteResult[];
 }
 
