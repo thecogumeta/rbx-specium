@@ -140,6 +140,154 @@ local speciumSuite = Specium.suite("Specium", function(ctx)
 		Specium.expect(result.failed).withMessage("failed").toBe(1)
 	end)
 
+	ctx.describe("skip", function(ctx)
+		ctx.it("should count skipped tests", function()
+			local suite = Specium.suite("skip", function(ctx)
+				ctx.it("pass", function()
+					return Specium.success("ok")
+				end)
+
+				ctx.skip("skipped", function()
+					return Specium.error("should not run")
+				end)
+			end)
+
+			local _, result = Specium.run(suite)
+
+			Specium.expect(result.total).withMessage("total").toBe(2)
+			Specium.expect(result.passed).withMessage("passed").toBe(1)
+			Specium.expect(result.skipped).withMessage("skipped").toBe(1)
+			Specium.expect(result.failed).withMessage("failed").toBe(0)
+		end)
+
+		ctx.it("should not run skipped test fn", function()
+			local ran = false
+
+			local suite = Specium.suite("skip", function(ctx)
+				ctx.skip("skipped", function()
+					ran = true
+				end)
+			end)
+
+			Specium.run(suite)
+
+			Specium.expect(ran).withMessage("should not have run").toBe(false)
+		end)
+
+		ctx.it("should show skipped in output", function()
+			local suite = Specium.suite("skip", function(ctx)
+				ctx.skip("my skipped test", function() end)
+			end)
+
+			local output = Specium.run(suite)
+
+			Specium.expect(output).toContain("Skip")
+			Specium.expect(output).toContain("my skipped test")
+		end)
+
+		ctx.it("should handle all tests skipped", function()
+			local suite = Specium.suite("all skipped", function(ctx)
+				ctx.skip("a", function() end)
+				ctx.skip("b", function() end)
+			end)
+
+			local output, result = Specium.run(suite)
+
+			Specium.expect(result.skipped).withMessage("skipped").toBe(2)
+			Specium.expect(result.failed).withMessage("failed").toBe(0)
+			Specium.expect(output).toContain("all tests skipped")
+		end)
+	end)
+
+	ctx.describe("hooks", function(ctx)
+		ctx.it("beforeEach should run before each test", function()
+			local count = 0
+
+			local suite = Specium.suite("hooks", function(ctx)
+				ctx.beforeEach(function()
+					count += 1
+				end)
+
+				ctx.it("a", function() end)
+				ctx.it("b", function() end)
+				ctx.it("c", function() end)
+			end)
+
+			Specium.run(suite)
+
+			Specium.expect(count).withMessage("beforeEach count").toBe(3)
+		end)
+
+		ctx.it("afterEach should run after each test", function()
+			local count = 0
+
+			local suite = Specium.suite("hooks", function(ctx)
+				ctx.afterEach(function()
+					count += 1
+				end)
+
+				ctx.it("a", function() end)
+				ctx.it("b", function() end)
+			end)
+
+			Specium.run(suite)
+
+			Specium.expect(count).withMessage("afterEach count").toBe(2)
+		end)
+
+		ctx.it("beforeAll should run once before all tests", function()
+			local count = 0
+
+			local suite = Specium.suite("hooks", function(ctx)
+				ctx.beforeAll(function()
+					count += 1
+				end)
+
+				ctx.it("a", function() end)
+				ctx.it("b", function() end)
+				ctx.it("c", function() end)
+			end)
+
+			Specium.run(suite)
+
+			Specium.expect(count).withMessage("beforeAll count").toBe(1)
+		end)
+
+		ctx.it("afterAll should run once after all tests", function()
+			local count = 0
+
+			local suite = Specium.suite("hooks", function(ctx)
+				ctx.afterAll(function()
+					count += 1
+				end)
+
+				ctx.it("a", function() end)
+				ctx.it("b", function() end)
+			end)
+
+			Specium.run(suite)
+
+			Specium.expect(count).withMessage("afterAll count").toBe(1)
+		end)
+
+		ctx.it("beforeEach should not run for skipped tests", function()
+			local count = 0
+
+			local suite = Specium.suite("hooks", function(ctx)
+				ctx.beforeEach(function()
+					count += 1
+				end)
+
+				ctx.it("a", function() end)
+				ctx.skip("b", function() end)
+			end)
+
+			Specium.run(suite)
+
+			Specium.expect(count).withMessage("beforeEach count").toBe(1)
+		end)
+	end)
+
 	ctx.describe("expect matchers", function(ctx)
 		ctx.it("toBe", function()
 			Specium.expect(1 + 1).toBe(2)
@@ -151,6 +299,10 @@ local speciumSuite = Specium.suite("Specium", function(ctx)
 
 		ctx.it("toEqual deep", function()
 			Specium.expect({ a = 1 }).toEqual({ a = 1 })
+		end)
+
+		ctx.it("toEqual nested", function()
+			Specium.expect({ a = { b = 2 } }).toEqual({ a = { b = 2 } })
 		end)
 
 		ctx.it("toContain string", function()
@@ -186,6 +338,11 @@ local speciumSuite = Specium.suite("Specium", function(ctx)
 			Specium.expect(0.1 + 0.2).toBeNear(0.3)
 		end)
 
+		ctx.it("toBeNear with custom epsilon", function()
+			Specium.expect(1.5).toBeNear(1.6, 0.2)
+			Specium.expect(1.5).never.toBeNear(1.6, 0.05)
+		end)
+
 		ctx.it("toBeGreaterThan", function()
 			Specium.expect(5).toBeGreaterThan(3)
 		end)
@@ -198,6 +355,10 @@ local speciumSuite = Specium.suite("Specium", function(ctx)
 			Specium.expect("hello123").toMatch("%d+")
 		end)
 
+		ctx.it("toMatch with .never", function()
+			Specium.expect("hello").never.toMatch("%d+")
+		end)
+
 		ctx.it("toThrow", function()
 			Specium.expect(function()
 				error("oops")
@@ -208,6 +369,10 @@ local speciumSuite = Specium.suite("Specium", function(ctx)
 			Specium.expect(function()
 				error("oops", 0)
 			end).toThrow("oops")
+		end)
+
+		ctx.it("toThrow with .never", function()
+			Specium.expect(function() end).never.toThrow()
 		end)
 
 		ctx.it("withMessage on failure", function()
