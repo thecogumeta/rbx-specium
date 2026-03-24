@@ -61,8 +61,8 @@ export type SpeciumRunResult = {
 --[=[
 	@interface SpeciumSuiteContext
 	@within Specium
-	.it   (name: string, fn: () -> SpeciumResult, timeout: number?) -> ()
-	.skip (name: string, fn: () -> SpeciumResult, timeout: number?) -> ()
+	.it   (name: string, fn: () -> SpeciumResult, timeout: number?) -> () -- Registers a test case inside the current suite
+	.skip (name: string, fn: () -> SpeciumResult, timeout: number?) -> () -- Registers a test case inside the current suite
 	.describe (name: string, fn: (SpeciumSuiteContext) -> ()) -> () -- Creates a nested sub-suite
 	.beforeAll (() -> ())? -- Runs once before all tests in the suite
 	.afterAll (() -> ())? -- Runs once after all tests in the suite
