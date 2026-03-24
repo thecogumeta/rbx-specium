@@ -387,6 +387,57 @@ local speciumSuite = Specium.suite("Specium", function(ctx)
 			Specium.expect(result.failed).withMessage("failed count").toBe(1)
 		end)
 	end)
+
+	ctx.describe("timeout", function(ctx)
+		ctx.it("should fail test that exceeds timeout", function()
+			local suite = Specium.suite("timeout", function(ctx)
+				ctx.it("slow", function()
+					task.wait(5)
+				end, 0.1)
+			end)
+
+			local _, result = Specium.run(suite)
+
+			Specium.expect(result.failed).withMessage("failed count").toBe(1)
+		end)
+
+		ctx.it("should include timeout duration in message", function()
+			local suite = Specium.suite("timeout", function(ctx)
+				ctx.it("slow", function()
+					task.wait(5)
+				end, 0.1)
+			end)
+
+			local output = Specium.run(suite)
+
+			Specium.expect(output).toContain("Timeout after 0.1s")
+		end)
+
+		ctx.it("should pass test that finishes within timeout", function()
+			local suite = Specium.suite("timeout", function(ctx)
+				ctx.it("fast", function()
+					task.wait(0.05)
+					return Specium.success("ok")
+				end, 1)
+			end)
+
+			local _, result = Specium.run(suite)
+
+			Specium.expect(result.passed).withMessage("passed count").toBe(1)
+		end)
+
+		ctx.it("should not affect tests without timeout", function()
+			local suite = Specium.suite("timeout", function(ctx)
+				ctx.it("no timeout", function()
+					return Specium.success("ok")
+				end)
+			end)
+
+			local _, result = Specium.run(suite)
+
+			Specium.expect(result.passed).withMessage("passed count").toBe(1)
+		end)
+	end)
 end)
 
 local output, result = Specium.run(speciumSuite)
