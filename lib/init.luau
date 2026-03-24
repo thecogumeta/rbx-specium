@@ -11,6 +11,7 @@ type SpeciumTest = {
 	name: string,
 	fn: () -> SpeciumResult,
 	skipped: boolean,
+	timeout: number?,
 }
 type SpeciumSuite = {
 	name: string,
@@ -60,8 +61,8 @@ export type SpeciumRunResult = {
 --[=[
 	@interface SpeciumSuiteContext
 	@within Specium
-	.it (name: string, fn: () -> SpeciumResult) -> () -- Registers a test case inside the current suite
-	.skip (name: string, fn () -> SpeciumResult) -> () -- Registers a test case that will be skipped when the suite runs
+	.it   (name: string, fn: () -> SpeciumResult, timeout: number?) -> ()
+	.skip (name: string, fn: () -> SpeciumResult, timeout: number?) -> ()
 	.describe (name: string, fn: (SpeciumSuiteContext) -> ()) -> () -- Creates a nested sub-suite
 	.beforeAll (() -> ())? -- Runs once before all tests in the suite
 	.afterAll (() -> ())? -- Runs once after all tests in the suite
@@ -113,19 +114,21 @@ function Specium.suite(name: string, fn: (SpeciumSuiteContext) -> ()): SpeciumSu
 	local function createContext(currentSuite: SpeciumSuite): SpeciumSuiteContext
 		local ctx = {}
 
-		function ctx.it(name: string, fn: () -> SpeciumResult)
+		function ctx.it(name: string, fn: () -> SpeciumResult, timeout: number?)
 			table.insert(currentSuite.tests, {
 				name = name,
 				fn = fn,
 				skipped = false,
+				timeout = timeout,
 			})
 		end
 
-		function ctx.skip(name: string, fn: () -> SpeciumResult)
+		function ctx.skip(name: string, fn: () -> SpeciumResult, timeout: number?)
 			table.insert(currentSuite.tests, {
 				name = name,
 				fn = fn,
 				skipped = true,
+				timeout = timeout,
 			})
 		end
 
@@ -238,7 +241,32 @@ function Specium.run(suite: SpeciumSuite): (string, SpeciumRunResult)
 			end
 
 			opcall(currentSuite.beforeEach, "beforeEach")
-			local ok, result = pcall(test.fn)
+
+			local ok: boolean, result: any
+
+			if test.timeout then
+				local done = false
+
+				local thread = task.spawn(function()
+					ok, result = pcall(test.fn)
+					done = true
+				end)
+
+				local timeoutThread = task.delay(test.timeout, function()
+					ok, result = false, `Timeout after {test.timeout}s`
+					done = true
+				end)
+
+				repeat
+					task.wait()
+				until done
+
+				task.cancel(thread)
+				task.cancel(timeoutThread)
+			else
+				ok, result = pcall(test.fn)
+			end
+
 			opcall(currentSuite.afterEach, "afterEach")
 
 			if not ok then
