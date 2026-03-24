@@ -213,9 +213,7 @@ function Specium.run(suite: SpeciumSuite): (string, SpeciumRunResult)
 				return
 			end
 
-			local ok, err = xpcall(fn, function(e)
-				return `{e}\n{debug.traceback()}`
-			end)
+			local ok, err = pcall(fn)
 
 			if not ok then
 				warn(`[Specium] {hookName} failed in "{currentSuite.name}": {err}`)
