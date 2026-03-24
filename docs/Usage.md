@@ -148,3 +148,26 @@ end)
 - `afterEach` — runs after each test
 
 Hooks are scoped to their suite and do not affect parent or sibling suites.
+
+## Timeouts
+
+Pass a timeout (in seconds) as the third argument to `t.it` or `t.skip`. If the test takes longer than the limit, it fails automatically with a timeout message.
+
+```lua
+local suite = Specium.suite("Network", function(t)
+    t.it("fetches data", function()
+        local result = HttpService:GetAsync("https://example.com")
+        Specium.expect(result).never.toBeNil()
+    end, 5)
+end)
+```
+
+```
+-- > Network
+--   [Failure] fetches data - Timeout after 5s
+--
+-- Result:
+-- 0/1 (0%) tests passed
+```
+
+Tests without a timeout run indefinitely.
