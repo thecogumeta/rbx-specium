@@ -25,6 +25,7 @@ interface SpeciumTestResult {
 
 interface SpeciumSuiteContext {
   it(name: string, fn: () => SpeciumResult | void): void;
+  test(name: string, fn: () => SpeciumResult | void): void;
   describe(name: string, fn: (ctx: SpeciumSuiteContext) => void): void;
   beforeAll(fn: () => void): void;
   afterAll(fn: () => void): void;
