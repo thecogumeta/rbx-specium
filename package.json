@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/specium",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A simple and flexible testing framework for Roblox",
   "main": "lib/init.luau",
   "types": "lib/index.d.ts",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thecogumeta/specium.git"
+    "url": "git+https://github.com/thecogumeta/rbx-specium.git"
   },
   "keywords": [
     "roblox",
@@ -24,9 +24,9 @@
   "author": "Cogu ( @thecogumeta )",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thecogumeta/specium/issues"
+    "url": "https://github.com/thecogumeta/rbx-specium/issues"
   },
-  "homepage": "https://github.com/thecogumeta/specium#readme",
+  "homepage": "https://github.com/thecogumeta/rbx-specium#readme",
   "peerDependencies": {
     "@rbxts/types": "*"
   },
