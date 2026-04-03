@@ -1,7 +1,7 @@
 <div align="center">
 	<h1>Specium</h1>
 	<p>A simple and flexible <code>testing framework</code> for Roblox</p>
-	<a href="https://thecogumeta.github.io/specium/"><strong>View docs</strong></a>
+	<a href="https://thecogumeta.github.io/rbx-specium/"><strong>View docs</strong></a>
 </div>
 
 <!--moonwave-hide-before-this-line-->
