@@ -528,7 +528,7 @@ function Specium.expect(received: any)
 			end
 			if not condition then
 				local finalMessage = customMessage and `{customMessage}\n{message}` or message
-				error(finalMessage, 2)
+				error(finalMessage, 0)
 			end
 		end
 
