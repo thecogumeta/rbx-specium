@@ -9,7 +9,7 @@ local Specium = {}
 
 type SpeciumTest = {
 	name: string,
-	fn: () -> SpeciumResult,
+	fn: () -> SpeciumResult?,
 	skipped: boolean,
 	timeout: number?,
 }
@@ -70,8 +70,8 @@ export type SpeciumRunResult = {
 	.afterEach (() -> ())? -- Runs after each test in the suite
 ]=]
 export type SpeciumSuiteContext = {
-	it: (name: string, fn: () -> SpeciumResult) -> (),
-	skip: (name: string, fn: () -> SpeciumResult) -> (),
+	it: (name: string, fn: () -> SpeciumResult?) -> (),
+	skip: (name: string, fn: () -> SpeciumResult?) -> (),
 	describe: (name: string, fn: (SpeciumSuiteContext) -> ()) -> (),
 	beforeAll: (() -> ()) -> (),
 	afterAll: (() -> ()) -> (),
@@ -114,7 +114,7 @@ function Specium.suite(name: string, fn: (SpeciumSuiteContext) -> ()): SpeciumSu
 	local function createContext(currentSuite: SpeciumSuite): SpeciumSuiteContext
 		local ctx = {}
 
-		function ctx.it(name: string, fn: () -> SpeciumResult, timeout: number?)
+		function ctx.it(name: string, fn: () -> SpeciumResult?, timeout: number?)
 			table.insert(currentSuite.tests, {
 				name = name,
 				fn = fn,
@@ -123,7 +123,7 @@ function Specium.suite(name: string, fn: (SpeciumSuiteContext) -> ()): SpeciumSu
 			})
 		end
 
-		function ctx.skip(name: string, fn: () -> SpeciumResult, timeout: number?)
+		function ctx.skip(name: string, fn: () -> SpeciumResult?, timeout: number?)
 			table.insert(currentSuite.tests, {
 				name = name,
 				fn = fn,
