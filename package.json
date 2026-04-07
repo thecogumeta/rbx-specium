@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/specium",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A simple and flexible testing framework for Roblox",
   "main": "lib/init.luau",
   "types": "lib/index.d.ts",
